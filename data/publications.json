@@ -1,58 +1,578 @@
 {
   "meta": {
     "orcid": "0000-0002-9155-1144",
-    "last_synced": null,
-    "source": "Starter snapshot; run GitHub Action to replace with current ORCID public record."
+    "last_synced": "2026-09-15T12:11:44.102724+00:00",
+    "source": "ORCID Public API v3.0"
   },
   "publications": [
     {
+      "title": "Efficient UV Organic Solid‐State Lasers with Ultra‐Short Wavelengths Based on Dispirofluorene‐Indenofluorene Isomers",
+      "authors": [
+        "Yusei Kaya",
+        "Hyung Suk Kim",
+        "Denis Ari",
+        "Kevin Mall Haidaraly",
+        "Isabelle Hantonne",
+        "Buddhika S. B. Karunathilaka",
+        "Ayano Abe",
+        "Youhei Chitose",
+        "Sebastien Forget",
+        "Sebastien Chenais",
+        "Cyril Poriel",
+        "Fabrice Mathevet",
+        "Chihaya Adachi"
+      ],
+      "journal": "Advanced Functional Materials",
+      "year": 2026,
+      "doi": "10.1002/adfm.202514060",
+      "url": "https://doi.org/10.1002/adfm.202514060",
+      "type": "journal-article",
+      "put_code": 191072163,
+      "featured": false
+    },
+    {
+      "title": "Complementary Multi‐Resonance Thermally Activated Delayed Fluorescence Design for Blue OLEDs Beyond the Concentration Limit",
+      "authors": [
+        "Chanhee Lee",
+        "Hyung Suk Kim",
+        "Dahee Boo",
+        "Hye In Kwon",
+        "Heewon Woo",
+        "Youichi Tsuchiya",
+        "Sae Youn Lee",
+        "Chihaya Adachi"
+      ],
+      "journal": "Angewandte Chemie International Edition",
+      "year": 2025,
+      "doi": "10.1002/anie.202519657",
+      "url": "https://doi.org/10.1002/anie.202519657",
+      "type": "journal-article",
+      "put_code": 195962693,
+      "featured": false
+    },
+    {
+      "title": "Complementary Multi‐Resonance Thermally Activated Delayed Fluorescence Design for Blue OLEDs Beyond the Concentration Limit",
+      "authors": [
+        "Chanhee Lee",
+        "Hyung Suk Kim",
+        "Dahee Boo",
+        "Hye In Kwon",
+        "Heewon Woo",
+        "Youichi Tsuchiya",
+        "Sae Youn Lee",
+        "Chihaya Adachi"
+      ],
+      "journal": "Angewandte Chemie",
+      "year": 2025,
+      "doi": "10.1002/ange.202519657",
+      "url": "https://doi.org/10.1002/ange.202519657",
+      "type": "journal-article",
+      "put_code": 195962691,
+      "featured": false
+    },
+    {
+      "title": "Advancing efficiency in deep-blue OLEDs: Exploring a machine learning–driven multiresonance TADF molecular design",
+      "authors": [
+        "Hyung Suk Kim",
+        "Hyung Jin Cheon",
+        "Sang Hoon Lee",
+        "Junho Kim",
+        "Seunghyup Yoo",
+        "Yun-Hi Kim",
+        "Chihaya Adachi"
+      ],
+      "journal": "Science Advances",
+      "year": 2025,
+      "doi": "10.1126/sciadv.adr1326",
+      "url": "https://doi.org/10.1126/sciadv.adr1326",
+      "type": "journal-article",
+      "put_code": 176410501,
+      "featured": false
+    },
+    {
+      "title": "Visualization of Multiple-Resonance-Induced Frontier Molecular Orbitals in a Single Multiple-Resonance Thermally Activated Delayed Fluorescence Molecule",
+      "authors": [
+        "Jaehyun Bae",
+        "Miyabi Imai-Imada",
+        "Hyung Suk Kim",
+        "Minhui Lee",
+        "Hiroshi Imada",
+        "Youichi Tsuchiya",
+        "Takuji Hatakeyama",
+        "Chihaya Adachi",
+        "Yousoo Kim"
+      ],
+      "journal": "ACS Nano",
+      "year": 2024,
+      "doi": "10.1021/acsnano.4c04813",
+      "url": "https://doi.org/10.1021/acsnano.4c04813",
+      "type": "journal-article",
+      "put_code": 162465483,
+      "featured": false
+    },
+    {
       "title": "Understanding of complex spin up-conversion processes in charge-transfer-type organic molecules",
-      "authors": ["Hyung Suk Kim", "Sang Hoon Lee", "Seunghyup Yoo", "Chihaya Adachi"],
+      "authors": [
+        "Hyung Suk Kim",
+        "Sang Hoon Lee",
+        "Seunghyup Yoo",
+        "Chihaya Adachi"
+      ],
       "journal": "Nature Communications",
       "year": 2024,
       "doi": "10.1038/s41467-024-46406-5",
       "url": "https://doi.org/10.1038/s41467-024-46406-5",
       "type": "journal-article",
+      "put_code": 155344830,
       "featured": true
     },
     {
+      "title": "Rigorous Determination of Dipole Orientation in Organic Thin Films Using Angle-Dependent Photoluminescence",
+      "authors": [
+        "Yeonghoon Jin",
+        "Hyung Suk Kim",
+        "Donggyun Lee",
+        "Chihaya Adachi",
+        "Seunghyup Yoo",
+        "Kyoungsik Yu"
+      ],
+      "journal": "The Journal of Physical Chemistry C",
+      "year": 2024,
+      "doi": "10.1021/acs.jpcc.3c06330",
+      "url": "https://doi.org/10.1021/acs.jpcc.3c06330",
+      "type": "journal-article",
+      "put_code": 151241415,
+      "featured": false
+    },
+    {
+      "title": "Naphthalene Diimide‐Based Hydrogen‐Bonded Organic Framework for High Electrical Conductivity and Ammonia Sensor Applications",
+      "authors": [
+        "Kentaro Imaoka",
+        "Hyung Suk Kim",
+        "Yusei Yamamoto",
+        "Satoshi Fukutomi",
+        "Lise‐Marie Chamoreau",
+        "Liyuan Qu",
+        "Hiroaki Iguchi",
+        "Youichi Tsuchiya",
+        "Toshikazu Ono",
+        "Fabrice Mathevet",
+        "Chihaya Adachi"
+      ],
+      "journal": "Advanced Functional Materials",
+      "year": 2024,
+      "doi": "10.1002/adfm.202409299",
+      "url": "https://doi.org/10.1002/adfm.202409299",
+      "type": "journal-article",
+      "put_code": 166483821,
+      "featured": false
+    },
+    {
+      "title": "Comparison of Exciton Annihilation Processes in Prototypical Charge-Transfer Molecules",
+      "authors": [
+        "Hyung Suk Kim",
+        "Sang Hoon Lee",
+        "Chihaya Adachi"
+      ],
+      "journal": "The Journal of Physical Chemistry C",
+      "year": 2024,
+      "doi": "10.1021/acs.jpcc.3c06465",
+      "url": "https://doi.org/10.1021/acs.jpcc.3c06465",
+      "type": "journal-article",
+      "put_code": 147810342,
+      "featured": false
+    },
+    {
       "title": "Toward highly efficient deep-blue OLEDs: Tailoring the multiresonance-induced TADF molecules for suppressed excimer formation and near-unity horizontal dipole ratio",
-      "authors": ["Hyung Suk Kim", "Hyung Jin Cheon", "Donggyun Lee", "Woochan Lee", "Junho Kim", "Yun-Hi Kim", "Seunghyup Yoo"],
+      "authors": [
+        "Hyung Suk Kim",
+        "Hyung Jin Cheon",
+        "Donggyun Lee",
+        "Woochan Lee",
+        "Junho Kim",
+        "Yun-Hi Kim",
+        "Seunghyup Yoo"
+      ],
       "journal": "Science Advances",
       "year": 2023,
       "doi": "10.1126/sciadv.adf1388",
       "url": "https://doi.org/10.1126/sciadv.adf1388",
       "type": "journal-article",
+      "put_code": 136067123,
       "featured": true
     },
     {
-      "title": "Enhancement of Reverse Intersystem Crossing in Charge-Transfer Molecule through Internal Heavy Atom Effect",
-      "authors": ["Hyung Suk Kim", "Ja Yeon Lee", "Seongjun Shin", "Wonkyo Jeong"],
+      "title": "Molecular Engineering for Shortening the Pt···Pt Distances in Pt(II) Dinuclear Complexes and Enhancing the Efficiencies of these Complexes for Application in Deep‐Red and Near‐IR OLEDs",
+      "authors": [
+        "Palanisamy Rajakannu",
+        "Woochan Lee",
+        "Sanghoon Park",
+        "Hyung Suk Kim",
+        "Hanif Mubarok",
+        "Min Hyung Lee",
+        "Seunghyup Yoo"
+      ],
+      "journal": "Advanced Functional Materials",
+      "year": 2023,
+      "doi": "10.1002/adfm.202211853",
+      "url": "https://doi.org/10.1002/adfm.202211853",
+      "type": "journal-article",
+      "put_code": 127871402,
+      "featured": false
+    },
+    {
+      "title": "Realization of Flexible Ultraviolet Organic Light-Emitting Diodes: Key Design Issues",
+      "authors": [
+        "Lee, Donggyun",
+        "Park, Jaehyeok",
+        "Lee, Woochan",
+        "Kim, Hyung Suk",
+        "Yoo, Seunghyup"
+      ],
+      "journal": "Advanced Photonics Research",
+      "year": 2021,
+      "doi": "10.1002/adpr.202100108",
+      "url": "https://publons.com/wos-op/publon/48860789/",
+      "type": "journal-article",
+      "put_code": 169900274,
+      "featured": false
+    },
+    {
+      "title": "Quenching-Resistant Solid-State Photoluminescence of Graphene Quantum Dots: Reduction of π-π Stacking by Surface Functionalization with POSS, PEG, and HDA",
+      "authors": [
+        "Park, Minsu",
+        "Jeong, Yangho",
+        "Kim, Hyung Suk",
+        "Lee, Woochan",
+        "Nam, Sang-Hyeon",
+        "Lee, Sukki",
+        "Yoon, Hyewon",
+        "Kim, Jin",
+        "Yoo, Seunghyup",
+        "Jeon, Seokwoo"
+      ],
       "journal": "Advanced Functional Materials",
       "year": 2021,
-      "doi": "10.1002/adfm.202104646",
-      "url": "https://doi.org/10.1002/adfm.202104646",
+      "doi": "10.1002/adfm.202102741",
+      "url": "https://publons.com/wos-op/publon/46576421/",
       "type": "journal-article",
-      "featured": true
+      "put_code": 169900257,
+      "featured": false
     },
     {
       "title": "Organic Sub-Bandgap Schottky Barrier Photodetectors with Near-Infrared Coherent Perfect Absorption",
-      "authors": ["Yeonghoon Jin", "Hyung Suk Kim", "Junghoon Park"],
+      "authors": [
+        "Yeonghoon Jin",
+        "Hyung Suk Kim",
+        "Junghoon Park",
+        "Seunghyup Yoo",
+        "Kyoungsik Yu"
+      ],
       "journal": "ACS Photonics",
       "year": 2021,
       "doi": "10.1021/acsphotonics.1c00478",
       "url": "https://doi.org/10.1021/acsphotonics.1c00478",
       "type": "journal-article",
+      "put_code": 95851081,
       "featured": true
     },
     {
+      "title": "Enhancement of Reverse Intersystem Crossing in Charge‐Transfer Molecule through Internal Heavy Atom Effect",
+      "authors": [
+        "Hyung Suk Kim",
+        "Ja Yeon Lee",
+        "Seongjun Shin",
+        "Wonkyo Jeong",
+        "Sang Hoon Lee",
+        "Seonghyeon Kim",
+        "Jihoon Lee",
+        "Min Chul Suh",
+        "Seunghyup Yoo"
+      ],
+      "journal": "Advanced Functional Materials",
+      "year": 2021,
+      "doi": "10.1002/adfm.202104646",
+      "url": "https://doi.org/10.1002/adfm.202104646",
+      "type": "journal-article",
+      "put_code": 98000599,
+      "featured": true
+    },
+    {
+      "title": "Naphthalene Benzimidazole Based Neutral Ir(III) Emitters for Deep Red Organic Light-Emitting Diodes",
+      "authors": [
+        "Palanisamy Rajakannu",
+        "Hyung Suk Kim",
+        "Woochan Lee",
+        "Ajay Kumar",
+        "Min Hyung Lee",
+        "Seunghyup Yoo"
+      ],
+      "journal": "Inorganic Chemistry",
+      "year": 2020,
+      "doi": "10.1021/acs.inorgchem.0c01561",
+      "url": "https://doi.org/10.1021/acs.inorgchem.0c01561",
+      "type": "journal-article",
+      "put_code": 79450677,
+      "featured": false
+    },
+    {
+      "title": "Controllable Singlet–Triplet Energy Splitting of Graphene Quantum Dots through Oxidation: From Phosphorescence to TADF",
+      "authors": [
+        "Minsu Park",
+        "Hyung Suk Kim",
+        "Hyewon Yoon",
+        "Jin Kim",
+        "Sukki Lee",
+        "Seunghyup Yoo",
+        "Seokwoo Jeon"
+      ],
+      "journal": "Advanced Materials",
+      "year": 2020,
+      "doi": "10.1002/adma.202000936",
+      "url": "https://doi.org/10.1002/adma.202000936",
+      "type": "journal-article",
+      "put_code": 75662620,
+      "featured": false
+    },
+    {
+      "title": "Blue Graphene Quantum Dots with High Color Purity by Controlling Subdomain Formation for Light-Emitting Devices",
+      "authors": [
+        "Hyewon Yoon",
+        "Hyung Suk Kim",
+        "Jungmo Kim",
+        "Minsu Park",
+        "Byunghoon Kim",
+        "Sukki Lee",
+        "Kisuk Kang",
+        "Seunghyup Yoo",
+        "Seokwoo Jeon"
+      ],
+      "journal": "ACS Applied Nano Materials",
+      "year": 2020,
+      "doi": "10.1021/acsanm.0c00930",
+      "url": "https://doi.org/10.1021/acsanm.0c00930",
+      "type": "journal-article",
+      "put_code": 76904862,
+      "featured": false
+    },
+    {
+      "title": "Photophysical Properties of Thermally Activated Delayed Fluorescent Materials upon Distortion of Central Axis of Donor Moiety (vol 122, pg 28576, 2018)",
+      "authors": [
+        "Kim, Hyung Suk",
+        "Park, Hansol",
+        "Park, So-Ra",
+        "Lee, Sang Hoon",
+        "Ahn, Yunho",
+        "Lee, Yong Sup",
+        "Suh, Mm Chul"
+      ],
+      "journal": "The Journal of Physical Chemistry C",
+      "year": 2019,
+      "doi": "10.1021/acs.jpcc.8b12429",
+      "url": "https://publons.com/wos-op/publon/30592591/",
+      "type": "journal-article",
+      "put_code": 169900261,
+      "featured": false
+    },
+    {
       "title": "Mitigating the Trade-off between Triplet Harvesting and Roll-off by Opening a Dexter-Type Channel in OLEDs",
-      "authors": ["Hyung Suk Kim", "Sang Hoon Lee", "Ja Yeon Lee", "Seunghyup Yoo"],
+      "authors": [
+        "Hyung Suk Kim",
+        "Sang Hoon Lee",
+        "Ja Yeon Lee",
+        "Seunghyup Yoo",
+        "Min Chul Suh"
+      ],
       "journal": "The Journal of Physical Chemistry C",
       "year": 2019,
       "doi": "10.1021/acs.jpcc.9b05007",
       "url": "https://doi.org/10.1021/acs.jpcc.9b05007",
       "type": "journal-article",
+      "put_code": 74112051,
+      "featured": false
+    },
+    {
+      "title": "The behaviour of solution-processed green phosphorescent organic light emitting diodes with undesirable host composition",
+      "authors": [
+        "Kim, Hyung Suk",
+        "Kang, Ji-Ho",
+        "Lee, Donghyun",
+        "Kwak, Sang Kyu",
+        "Ameen, Shahid",
+        "Lee, Jaemin",
+        "Suh, Min Chul"
+      ],
+      "journal": "Organic Electronics",
+      "year": 2018,
+      "doi": "10.1016/j.orgel.2017.12.013",
+      "url": "https://publons.com/wos-op/publon/16702133/",
+      "type": "journal-article",
+      "put_code": 169900271,
+      "featured": false
+    },
+    {
+      "title": "The analysis of energy transfer mechanism according to abnormal host mixing composition by using solution-processed OLEDs",
+      "authors": [
+        "Ji-Ho Kang",
+        "Hyung Suk Kim",
+        "Min Chul Suh"
+      ],
+      "journal": "SID Symposium Digest of Technical Papers",
+      "year": 2018,
+      "doi": "10.1002/sdtp.12429",
+      "url": "https://publons.com/wos-op/publon/16702137/",
+      "type": "journal-article",
+      "put_code": 169900263,
+      "featured": false
+    },
+    {
+      "title": "The Suppression of Viewing Angle Dependence of Top Emission Organic Light Emitting Diodes Having Strong Microcavity Characteristics by Applying Concave Patterned Anode",
+      "authors": [
+        "Nam Su Kim",
+        "Seon Hyeak Jung",
+        "Hyung Suk Kim",
+        "Min Chul Suh"
+      ],
+      "journal": "SID Symposium Digest of Technical Papers",
+      "year": 2018,
+      "doi": "10.1002/sdtp.12424",
+      "url": "https://publons.com/wos-op/publon/16702134/",
+      "type": "journal-article",
+      "put_code": 169900265,
+      "featured": false
+    },
+    {
+      "title": "Photophysical Properties of Thermally Activated Delayed Fluorescent Materials upon Distortion of Central Axis of Donor Moiety",
+      "authors": [
+        "Kim, Hyung Suk",
+        "Park, Hansol",
+        "Park, So-Ra",
+        "Lee, Sang Hoon",
+        "Ahn, Yunho",
+        "Lee, Yong Sup",
+        "Suh, Min Chul"
+      ],
+      "journal": "The Journal of Physical Chemistry C",
+      "year": 2018,
+      "doi": "10.1021/acs.jpcc.8b11144",
+      "url": "https://publons.com/wos-op/publon/16702138/",
+      "type": "journal-article",
+      "put_code": 169900269,
+      "featured": false
+    },
+    {
+      "title": "Actual Interpretation of Concentration Quenching Effect on Thermally Activated Delayed Fluorescence in a Solid Film",
+      "authors": [
+        "Hyung Suk Kim",
+        "So-Ra Park",
+        "Min Chul Suh"
+      ],
+      "journal": "SID Symposium Digest of Technical Papers",
+      "year": 2018,
+      "doi": "10.1002/sdtp.12430",
+      "url": "https://publons.com/wos-op/publon/16702136/",
+      "type": "journal-article",
+      "put_code": 169900266,
+      "featured": false
+    },
+    {
+      "title": "Improvement of viewing angle dependence of the white organic light emitting diodes with tandem structure by introduction of nanoporous polymer films",
+      "authors": [
+        "Kim, Hyung Suk",
+        "Joo, Chul Woong",
+        "Pyo, Beom",
+        "Lee, Jonghee",
+        "Suh, Min Chul"
+      ],
+      "journal": "Organic Electronics",
+      "year": 2017,
+      "doi": "10.1016/j.orgel.2016.10.042",
+      "url": "https://publons.com/wos-op/publon/16702127/",
+      "type": "journal-article",
+      "put_code": 169900270,
+      "featured": false
+    },
+    {
+      "title": "Concentration Quenching Behavior of Thermally Activated Delayed Fluorescence in a Solid Film",
+      "authors": [
+        "Hyung Suk Kim",
+        "So-Ra Park",
+        "Min Chul Suh"
+      ],
+      "journal": "The Journal of Physical Chemistry C",
+      "year": 2017,
+      "doi": "10.1021/acs.jpcc.7b02369",
+      "url": "https://publons.com/wos-op/publon/16702132/",
+      "type": "journal-article",
+      "put_code": 169900256,
+      "featured": false
+    },
+    {
+      "title": "Synthesis of Soluble Host Materials for Highly Efficient Red Phosphorescent Organic Light-Emitting Diodes",
+      "authors": [],
+      "journal": "ACS Applied Materials & Interfaces",
+      "year": 2016,
+      "doi": "10.1021/acsami.6b03281",
+      "url": "https://publons.com/wos-op/publon/16702129/",
+      "type": "journal-article",
+      "put_code": 169900262,
+      "featured": false
+    },
+    {
+      "title": "Suppression of the viewing angle dependence by introduction of nanoporous diffuser film on blue OLEDs with strong microcavity effect",
+      "authors": [],
+      "journal": "Organic Electronics",
+      "year": 2016,
+      "doi": "10.1016/j.orgel.2015.10.014",
+      "url": "https://publons.com/wos-op/publon/16702130/",
+      "type": "journal-article",
+      "put_code": 169900268,
+      "featured": false
+    },
+    {
+      "title": "P-205L: <i>Late-News Poster</i> : Improvement of Viewing Angle Dependence and Out-Coupling Efficiency of OLEDs with Strong Microcavity Structure by Introduction of Nanoporous Polymer Films",
+      "authors": [],
+      "journal": "SID Symposium Digest of Technical Papers",
+      "year": 2016,
+      "doi": "10.1002/sdtp.11068",
+      "url": "https://publons.com/wos-op/publon/16702131/",
+      "type": "journal-article",
+      "put_code": 169900264,
+      "featured": false
+    },
+    {
+      "title": "A nanoporous polymer film as a diffuser as well as a light extraction component for top emitting organic light emitting diodes with a strong microcavity structure",
+      "authors": [
+        "Pyo, Beom",
+        "Joo, Chul Woong",
+        "Kim, Hyung Suk",
+        "Kwon, Byoung-Hwa",
+        "Lee, Jeong-Ik",
+        "Lee, Jonghee",
+        "Suh, Min Chul"
+      ],
+      "journal": "Nanoscale",
+      "year": 2016,
+      "doi": "10.1039/c6nr00868b",
+      "url": "https://publons.com/wos-op/publon/16702140/",
+      "type": "journal-article",
+      "put_code": 169900258,
+      "featured": false
+    },
+    {
+      "title": "Highly efficient organic light emitting diodes formed by solution processed red emitters with evaporated blue common layer structure",
+      "authors": [
+        "Cho, Ye Ram",
+        "Kim, Hyung Suk",
+        "Yu, Young-Jun",
+        "Suh, Min Chul"
+      ],
+      "journal": "Scientific Reports",
+      "year": 2015,
+      "doi": "10.1038/srep15903",
+      "url": "https://publons.com/wos-op/publon/16702139/",
+      "type": "journal-article",
+      "put_code": 169900272,
       "featured": false
     }
   ]
