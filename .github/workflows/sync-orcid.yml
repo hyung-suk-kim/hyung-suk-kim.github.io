@@ -1,0 +1,41 @@
+name: Sync ORCID record
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 02:17 UTC = 11:17 KST
+    - cron: '17 2 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Pull public record from ORCID
+        env:
+          ORCID_ID: '0000-0002-9155-1144'
+          ORCID_CLIENT_ID: ${{ secrets.ORCID_CLIENT_ID }}
+          ORCID_CLIENT_SECRET: ${{ secrets.ORCID_CLIENT_SECRET }}
+        run: python scripts/sync_orcid.py
+
+      - name: Commit ORCID data changes
+        run: |
+          if git diff --quiet -- data/publications.json data/peer_reviews.json; then
+            echo "No ORCID changes."
+            exit 0
+          fi
+          git config user.name "orcid-sync[bot]"
+          git config user.email "orcid-sync[bot]@users.noreply.github.com"
+          git add data/publications.json data/peer_reviews.json
+          git commit -m "chore: sync ORCID works and peer reviews"
+          git push
