@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "orcid": "0000-0002-9155-1144",
+    "last_synced": null,
+    "source": "Starter snapshot; run GitHub Action to replace with current ORCID public record."
+  },
+  "publications": [
+    {
+      "title": "Understanding of complex spin up-conversion processes in charge-transfer-type organic molecules",
+      "authors": ["Hyung Suk Kim", "Sang Hoon Lee", "Seunghyup Yoo", "Chihaya Adachi"],
+      "journal": "Nature Communications",
+      "year": 2024,
+      "doi": "10.1038/s41467-024-46406-5",
+      "url": "https://doi.org/10.1038/s41467-024-46406-5",
+      "type": "journal-article",
+      "featured": true
+    },
+    {
+      "title": "Toward highly efficient deep-blue OLEDs: Tailoring the multiresonance-induced TADF molecules for suppressed excimer formation and near-unity horizontal dipole ratio",
+      "authors": ["Hyung Suk Kim", "Hyung Jin Cheon", "Donggyun Lee", "Woochan Lee", "Junho Kim", "Yun-Hi Kim", "Seunghyup Yoo"],
+      "journal": "Science Advances",
+      "year": 2023,
+      "doi": "10.1126/sciadv.adf1388",
+      "url": "https://doi.org/10.1126/sciadv.adf1388",
+      "type": "journal-article",
+      "featured": true
+    },
+    {
+      "title": "Enhancement of Reverse Intersystem Crossing in Charge-Transfer Molecule through Internal Heavy Atom Effect",
+      "authors": ["Hyung Suk Kim", "Ja Yeon Lee", "Seongjun Shin", "Wonkyo Jeong"],
+      "journal": "Advanced Functional Materials",
+      "year": 2021,
+      "doi": "10.1002/adfm.202104646",
+      "url": "https://doi.org/10.1002/adfm.202104646",
+      "type": "journal-article",
+      "featured": true
+    },
+    {
+      "title": "Organic Sub-Bandgap Schottky Barrier Photodetectors with Near-Infrared Coherent Perfect Absorption",
+      "authors": ["Yeonghoon Jin", "Hyung Suk Kim", "Junghoon Park"],
+      "journal": "ACS Photonics",
+      "year": 2021,
+      "doi": "10.1021/acsphotonics.1c00478",
+      "url": "https://doi.org/10.1021/acsphotonics.1c00478",
+      "type": "journal-article",
+      "featured": true
+    },
+    {
+      "title": "Mitigating the Trade-off between Triplet Harvesting and Roll-off by Opening a Dexter-Type Channel in OLEDs",
+      "authors": ["Hyung Suk Kim", "Sang Hoon Lee", "Ja Yeon Lee", "Seunghyup Yoo"],
+      "journal": "The Journal of Physical Chemistry C",
+      "year": 2019,
+      "doi": "10.1021/acs.jpcc.9b05007",
+      "url": "https://doi.org/10.1021/acs.jpcc.9b05007",
+      "type": "journal-article",
+      "featured": false
+    }
+  ]
+}
