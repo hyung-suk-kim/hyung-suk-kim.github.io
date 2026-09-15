@@ -6,8 +6,6 @@ const state = {
 };
 
 const ORCID_ID = '0000-0002-9155-1144';
-const THEME_KEY = 'hsk-theme';
-const THEME_ORDER = ['system', 'light', 'dark'];
 const $ = (s) => document.querySelector(s);
 
 function esc(s = '') {
@@ -40,29 +38,6 @@ function formatSyncDate(raw) {
 
 function formatReviewYear(item) {
   return item.completion_year ? String(item.completion_year) : '—';
-}
-
-function resolveTheme(pref) {
-  if (pref === 'system') {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-  return pref;
-}
-
-function applyTheme(pref, persist = true) {
-  const resolved = resolveTheme(pref);
-  document.documentElement.dataset.themePreference = pref;
-  document.documentElement.dataset.theme = resolved;
-  if (persist) localStorage.setItem(THEME_KEY, pref);
-
-  document.querySelectorAll('[data-theme-choice]').forEach(button => {
-    const active = button.dataset.themeChoice === pref;
-    button.setAttribute('aria-pressed', active ? 'true' : 'false');
-    button.classList.toggle('active', active);
-  });
-
-  const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', resolved === 'dark' ? '#090a0d' : '#f6f2ef');
 }
 
 function featuredCard(p, i) {
@@ -194,17 +169,6 @@ async function loadJSON(path, fallback) {
 
 async function init() {
   $('#copyrightYear').textContent = new Date().getFullYear();
-  applyTheme(localStorage.getItem(THEME_KEY) || 'system', false);
-
-  document.querySelectorAll('[data-theme-choice]').forEach(button => {
-    button.addEventListener('click', () => applyTheme(button.dataset.themeChoice));
-  });
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    if ((document.documentElement.dataset.themePreference || 'system') === 'system') {
-      applyTheme('system', false);
-    }
-  });
-
   const [pubData, peerData] = await Promise.all([
     loadJSON('data/publications.json', { publications: [], meta: {} }),
     loadJSON('data/peer_reviews.json', { peer_reviews: [], meta: {} })

@@ -8,16 +8,41 @@
   <title>Hyung Suk Kim — Researcher Profile</title>
   <script>
     (() => {
-      const pref = localStorage.getItem('hsk-theme') || 'system';
-      const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      document.documentElement.dataset.themePreference = pref;
-      document.documentElement.dataset.theme = pref === 'system' ? (dark ? 'dark' : 'light') : pref;
+      const KEY = 'hsk-theme';
+      const resolve = (pref) => pref === 'system'
+        ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        : pref;
+
+      window.HSKTheme = (pref, persist = true) => {
+        if (!['system', 'light', 'dark'].includes(pref)) pref = 'system';
+        const resolved = resolve(pref);
+        document.documentElement.setAttribute('data-theme-preference', pref);
+        document.documentElement.setAttribute('data-theme', resolved);
+        document.documentElement.style.colorScheme = resolved;
+        if (persist) localStorage.setItem(KEY, pref);
+
+        document.querySelectorAll('[data-theme-choice]').forEach((button) => {
+          const active = button.dataset.themeChoice === pref;
+          button.setAttribute('aria-pressed', active ? 'true' : 'false');
+          button.classList.toggle('active', active);
+        });
+
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', resolved === 'dark' ? '#090a0d' : '#f6f2ef');
+      };
+
+      window.HSKTheme(localStorage.getItem(KEY) || 'system', false);
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => {
+        if ((document.documentElement.getAttribute('data-theme-preference') || 'system') === 'system') {
+          window.HSKTheme('system', false);
+        }
+      });
     })();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=6.0" />
+  <link rel="stylesheet" href="assets/styles.css?v=7.0" />
 </head>
 <body>
   <div class="ambient ambient-a"></div>
@@ -38,9 +63,9 @@
         <a href="https://maxam.gachon.ac.kr/" target="_blank" rel="noreferrer">MAXAM ↗</a>
       </nav>
       <div class="theme-switcher" role="group" aria-label="Color theme">
-        <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="true">System</button>
-        <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
-        <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+        <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="true" onclick="window.HSKTheme('system')">System</button>
+        <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false" onclick="window.HSKTheme('light')">Light</button>
+        <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false" onclick="window.HSKTheme('dark')">Dark</button>
       </div>
     </div>
   </header>
@@ -63,7 +88,7 @@
         <aside class="identity-card" aria-label="Research identity">
           <div class="identity-top">
             <div class="portrait-wrap">
-              <img class="profile-portrait" src="assets/profile.png?v=6.0" alt="Illustrated portrait of Hyung Suk Kim" />
+              <img class="profile-portrait" src="assets/profile.png?v=7.0" alt="Illustrated portrait of Hyung Suk Kim" />
             </div>
             <div>
               <p class="identity-label">CURRENT</p>
@@ -74,7 +99,7 @@
           <div class="identity-divider"></div>
           <div class="identity-row"><span>ORCID</span><strong>0000-0002-9155-1144</strong></div>
           <div class="identity-row"><span>LAB</span><strong>MAXAM</strong></div>
-          <div class="identity-row"><span>FOCUS</span><strong>Photophysics · OLEDs · Computation</strong></div>
+          <div class="identity-row"><span>FOCUS</span><strong>Photophysics · OLEDs · Multiscale Modeling</strong></div>
           <div class="sync-line"><span class="status-dot"></span><span id="syncText">Scholarly record ready</span></div>
         </aside>
       </div>
@@ -157,6 +182,6 @@
     <span>Live scholarly profile · Publications and peer reviews sourced from ORCID</span>
   </footer>
 
-  <script src="assets/app.js?v=6.0" defer></script>
+  <script src="assets/app.js?v=7.0" defer></script>
 </body>
 </html>
