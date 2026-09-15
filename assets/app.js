@@ -181,12 +181,23 @@ async function setupVisitorCounter() {
   const stats = $('#visitorStats');
   if (!stats) return;
 
-  // Fail closed: the counter stays invisible unless every required step succeeds.
+  // The analytics service must never be able to break the page UI.
   stats.hidden = true;
 
   const cfg = await loadJSON('data/analytics.json', {});
   const code = String(cfg.goatcounter_code || '').trim().toLowerCase();
   if (!code || code.includes('replace') || !/^[a-z0-9][a-z0-9-]*$/.test(code)) return;
+
+  // Tracking is independent from the public visitor-counter endpoint.
+  // This is intentionally loaded first: a new GoatCounter site has no data yet,
+  // so the counter endpoint may be unavailable until the first visit is recorded.
+  if (!document.querySelector('script[data-goatcounter]')) {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://gc.zgo.at/count.js';
+    script.dataset.goatcounter = `https://${code}.goatcounter.com/count`;
+    document.body.appendChild(script);
+  }
 
   const base = `https://${code}.goatcounter.com/counter/TOTAL.json`;
   const today = kstDateString();
@@ -208,27 +219,17 @@ async function setupVisitorCounter() {
 
   try {
     const [todayCount, totalCount] = await Promise.all([
-      fetchCount(`${base}?start=${encodeURIComponent(today)}`),
+      fetchCount(`${base}?start=${encodeURIComponent(today)}&end=${encodeURIComponent(today)}`),
       fetchCount(base)
     ]);
 
     $('#todayVisits').textContent = todayCount;
     $('#totalVisits').textContent = totalCount;
     stats.hidden = false;
-
-    // Load tracking only after the service has responded successfully.
-    if (!document.querySelector('script[data-goatcounter]')) {
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = 'https://gc.zgo.at/count.js';
-      script.dataset.goatcounter = `https://${code}.goatcounter.com/count`;
-      script.onerror = () => { stats.hidden = true; };
-      document.body.appendChild(script);
-    }
   } catch (err) {
-    // External analytics must never leave a broken UI behind.
+    // Tracking keeps running; only the visible counter is hidden if unavailable.
     stats.hidden = true;
-    console.warn('Visitor counter unavailable; hidden automatically.', err);
+    console.warn('Visible visitor counter unavailable; tracking remains active.', err);
   }
 }
 
