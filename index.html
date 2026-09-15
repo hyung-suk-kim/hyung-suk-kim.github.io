@@ -42,7 +42,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=7.0" />
+  <link rel="stylesheet" href="assets/styles.css?v=9.0" />
 </head>
 <body>
   <div class="ambient ambient-a"></div>
@@ -179,9 +179,14 @@
 
   <footer class="footer shell">
     <span>© <span id="copyrightYear"></span> Hyung Suk Kim</span>
-    <span>Live scholarly profile · Publications and peer reviews sourced from ORCID</span>
+    <span class="visitor-stats" id="visitorStats" hidden aria-label="Site visit count">
+      <span>TODAY <strong id="todayVisits">—</strong></span>
+      <span class="visitor-divider">·</span>
+      <span>TOTAL <strong id="totalVisits">—</strong></span>
+    </span>
+    <span class="footer-source">Live scholarly profile · Publications and peer reviews sourced from ORCID</span>
   </footer>
 
-  <script src="assets/app.js?v=7.0" defer></script>
+  <script src="assets/app.js?v=9.1" defer></script>
 </body>
 </html>

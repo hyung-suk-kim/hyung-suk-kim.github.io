@@ -167,6 +167,71 @@ async function loadJSON(path, fallback) {
   }
 }
 
+
+function kstDateString() {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Seoul',
+    year: 'numeric', month: '2-digit', day: '2-digit'
+  }).formatToParts(new Date());
+  const get = type => parts.find(p => p.type === type)?.value || '';
+  return `${get('year')}-${get('month')}-${get('day')}`;
+}
+
+async function setupVisitorCounter() {
+  const stats = $('#visitorStats');
+  if (!stats) return;
+
+  // Fail closed: the counter stays invisible unless every required step succeeds.
+  stats.hidden = true;
+
+  const cfg = await loadJSON('data/analytics.json', {});
+  const code = String(cfg.goatcounter_code || '').trim().toLowerCase();
+  if (!code || code.includes('replace') || !/^[a-z0-9][a-z0-9-]*$/.test(code)) return;
+
+  const base = `https://${code}.goatcounter.com/counter/TOTAL.json`;
+  const today = kstDateString();
+
+  const fetchCount = async (url) => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 3500);
+    try {
+      const res = await fetch(url, { cache: 'no-store', signal: controller.signal });
+      if (!res.ok) throw new Error(`Counter HTTP ${res.status}`);
+      const data = await res.json();
+      const count = data.count;
+      if (count === undefined || count === null || count === '') throw new Error('Counter returned no count');
+      return count;
+    } finally {
+      clearTimeout(timer);
+    }
+  };
+
+  try {
+    const [todayCount, totalCount] = await Promise.all([
+      fetchCount(`${base}?start=${encodeURIComponent(today)}`),
+      fetchCount(base)
+    ]);
+
+    $('#todayVisits').textContent = todayCount;
+    $('#totalVisits').textContent = totalCount;
+    stats.hidden = false;
+
+    // Load tracking only after the service has responded successfully.
+    if (!document.querySelector('script[data-goatcounter]')) {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://gc.zgo.at/count.js';
+      script.dataset.goatcounter = `https://${code}.goatcounter.com/count`;
+      script.onerror = () => { stats.hidden = true; };
+      document.body.appendChild(script);
+    }
+  } catch (err) {
+    // External analytics must never leave a broken UI behind.
+    stats.hidden = true;
+    console.warn('Visitor counter unavailable; hidden automatically.', err);
+  }
+}
+
 async function init() {
   $('#copyrightYear').textContent = new Date().getFullYear();
   const [pubData, peerData] = await Promise.all([
@@ -190,6 +255,7 @@ async function init() {
 
   updateStats(pubData.meta || {}, peerData.meta || {});
   renderPeerReviews();
+  setupVisitorCounter();
 
   $('#searchInput').addEventListener('input', e => {
     state.query = e.target.value;
