@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/styles.css?v=6.0" />
 </head>
 <body>
   <div class="ambient ambient-a"></div>
@@ -37,10 +37,11 @@
         <a href="#service">Peer review</a>
         <a href="https://maxam.gachon.ac.kr/" target="_blank" rel="noreferrer">MAXAM ↗</a>
       </nav>
-      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Change color theme" title="Change color theme">
-        <span id="themeIcon" aria-hidden="true">◐</span>
-        <span id="themeLabel">System</span>
-      </button>
+      <div class="theme-switcher" role="group" aria-label="Color theme">
+        <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="true">System</button>
+        <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+        <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+      </div>
     </div>
   </header>
 
@@ -62,7 +63,7 @@
         <aside class="identity-card" aria-label="Research identity">
           <div class="identity-top">
             <div class="portrait-wrap">
-              <img class="profile-portrait" src="assets/profile.png" alt="Illustrated portrait of Hyung Suk Kim" />
+              <img class="profile-portrait" src="assets/profile.png?v=6.0" alt="Illustrated portrait of Hyung Suk Kim" />
             </div>
             <div>
               <p class="identity-label">CURRENT</p>
@@ -156,6 +157,6 @@
     <span>Live scholarly profile · Publications and peer reviews sourced from ORCID</span>
   </footer>
 
-  <script src="assets/app.js" defer></script>
+  <script src="assets/app.js?v=6.0" defer></script>
 </body>
 </html>

@@ -55,19 +55,14 @@ function applyTheme(pref, persist = true) {
   document.documentElement.dataset.theme = resolved;
   if (persist) localStorage.setItem(THEME_KEY, pref);
 
-  const iconMap = { system: '◐', light: '☼', dark: '☾' };
-  const labelMap = { system: 'System', light: 'Light', dark: 'Dark' };
-  if ($('#themeIcon')) $('#themeIcon').textContent = iconMap[pref];
-  if ($('#themeLabel')) $('#themeLabel').textContent = labelMap[pref];
+  document.querySelectorAll('[data-theme-choice]').forEach(button => {
+    const active = button.dataset.themeChoice === pref;
+    button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    button.classList.toggle('active', active);
+  });
 
   const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', resolved === 'dark' ? '#090a0d' : '#f5f1ed');
-}
-
-function cycleTheme() {
-  const current = document.documentElement.dataset.themePreference || 'system';
-  const idx = THEME_ORDER.indexOf(current);
-  applyTheme(THEME_ORDER[(idx + 1) % THEME_ORDER.length]);
+  if (meta) meta.setAttribute('content', resolved === 'dark' ? '#090a0d' : '#f6f2ef');
 }
 
 function featuredCard(p, i) {
@@ -201,7 +196,9 @@ async function init() {
   $('#copyrightYear').textContent = new Date().getFullYear();
   applyTheme(localStorage.getItem(THEME_KEY) || 'system', false);
 
-  $('#themeToggle').addEventListener('click', cycleTheme);
+  document.querySelectorAll('[data-theme-choice]').forEach(button => {
+    button.addEventListener('click', () => applyTheme(button.dataset.themeChoice));
+  });
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     if ((document.documentElement.dataset.themePreference || 'system') === 'system') {
       applyTheme('system', false);
