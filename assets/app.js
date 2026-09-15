@@ -6,6 +6,8 @@ const state = {
 };
 
 const ORCID_ID = '0000-0002-9155-1144';
+const THEME_KEY = 'hsk-theme';
+const THEME_ORDER = ['system', 'light', 'dark'];
 const $ = (s) => document.querySelector(s);
 
 function esc(s = '') {
@@ -28,29 +30,48 @@ function workURL(p) {
   return p.url || doiURL(p.doi) || `https://orcid.org/${ORCID_ID}`;
 }
 
-function formatShortDate(raw) {
+function formatSyncDate(raw) {
   if (!raw) return '';
   const d = new Date(raw);
   if (Number.isNaN(d.getTime())) return raw;
-  return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return `${String(d.getUTCDate()).padStart(2, '0')} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
 }
 
-function monthName(month) {
-  if (!month) return '';
-  const d = new Date(2000, Number(month) - 1, 1);
-  return d.toLocaleString(undefined, { month: 'short' });
+function formatReviewYear(item) {
+  return item.completion_year ? String(item.completion_year) : '—';
 }
 
-function formatReviewDate(item) {
-  const y = item.completion_year;
-  const m = item.completion_month;
-  if (y && m) return `${monthName(m)} ${y}`;
-  if (y) return String(y);
-  return item.date_label || 'Date not shown';
+function resolveTheme(pref) {
+  if (pref === 'system') {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  return pref;
 }
 
-function featuredCard(p) {
-  return `<a class="featured-item" href="${esc(workURL(p))}" target="_blank" rel="noreferrer">
+function applyTheme(pref, persist = true) {
+  const resolved = resolveTheme(pref);
+  document.documentElement.dataset.themePreference = pref;
+  document.documentElement.dataset.theme = resolved;
+  if (persist) localStorage.setItem(THEME_KEY, pref);
+
+  const iconMap = { system: '◐', light: '☼', dark: '☾' };
+  const labelMap = { system: 'System', light: 'Light', dark: 'Dark' };
+  if ($('#themeIcon')) $('#themeIcon').textContent = iconMap[pref];
+  if ($('#themeLabel')) $('#themeLabel').textContent = labelMap[pref];
+
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', resolved === 'dark' ? '#090a0d' : '#f5f1ed');
+}
+
+function cycleTheme() {
+  const current = document.documentElement.dataset.themePreference || 'system';
+  const idx = THEME_ORDER.indexOf(current);
+  applyTheme(THEME_ORDER[(idx + 1) % THEME_ORDER.length]);
+}
+
+function featuredCard(p, i) {
+  return `<a class="featured-item featured-accent-${(i % 4) + 1}" href="${esc(workURL(p))}" target="_blank" rel="noreferrer">
     <div class="featured-journal"><span>${esc(p.journal || p.type || 'Research output')}</span><span>${esc(p.year || '')}</span></div>
     <h3>${esc(p.title)}</h3>
     <div class="featured-bottom"><span>${esc((p.authors || []).slice(0, 4).join(', '))}${(p.authors || []).length > 4 ? ' et al.' : ''}</span><strong>View work ↗</strong></div>
@@ -73,17 +94,15 @@ function pubRow(p) {
 
 function peerReviewItemCard(item) {
   const link = item.url || `https://orcid.org/${ORCID_ID}`;
-  const metaBits = [item.review_type, item.organization, formatReviewDate(item)].filter(Boolean);
-  const source = item.source_name ? `<span class="service-note">Source: ${esc(item.source_name)}</span>` : '';
-  return `<article class="service-item">
-    <div class="service-item-top">
-      <div>
-        <h4>${esc(item.outlet || item.group_id || 'Peer review')}</h4>
-        <p>${metaBits.map(esc).join(' · ')}</p>
-      </div>
-      <a href="${esc(link)}" target="_blank" rel="noreferrer">View ↗</a>
+  const label = item.reviewer_role ? item.reviewer_role.replace(/_/g, ' ') : (item.review_type || 'review');
+  const source = item.source_name ? `<span class="service-note">Verified via ${esc(item.source_name)}</span>` : '';
+  return `<article class="service-item review-row">
+    <div class="review-year">${esc(formatReviewYear(item))}</div>
+    <div class="review-detail">
+      <p>${esc(label.charAt(0).toUpperCase() + label.slice(1))}</p>
+      ${source}
     </div>
-    ${source}
+    <a class="review-link" href="${esc(link)}" target="_blank" rel="noreferrer">View ↗</a>
   </article>`;
 }
 
@@ -111,7 +130,7 @@ function updateStats(pubMeta = {}, peerMeta = {}) {
 
   const syncDates = [pubMeta.last_synced, peerMeta.last_synced].filter(Boolean).sort().reverse();
   if (syncDates.length) {
-    const txt = `Synced ${formatShortDate(syncDates[0])}`;
+    const txt = `Last synced · ${formatSyncDate(syncDates[0])}`;
     $('#lastUpdated').textContent = txt;
     $('#syncText').textContent = txt;
   }
@@ -150,13 +169,13 @@ function renderPeerReviews() {
       const by = Math.max(...b[1].map(x => Number(x.completion_year) || 0));
       return by - ay || b[1].length - a[1].length || a[0].localeCompare(b[0]);
     })
-    .map(([name, arr]) => {
+    .map(([name, arr], i) => {
       const latest = arr.slice().sort((a, b) => (Number(b.completion_year) || 0) - (Number(a.completion_year) || 0))[0];
-      return `<article class="service-item grouped-service-item">
+      return `<article class="service-item grouped-service-item service-accent-${(i % 4) + 1}">
         <div class="service-item-top">
           <div>
             <h4>${esc(name)}</h4>
-            <p>${arr.length} review${arr.length > 1 ? 's' : ''}${latest ? ` · latest ${esc(formatReviewDate(latest))}` : ''}</p>
+            <p>${arr.length} review${arr.length > 1 ? 's' : ''}${latest && latest.completion_year ? ` · latest ${esc(formatReviewYear(latest))}` : ''}</p>
           </div>
           <span class="count-pill">${arr.length}</span>
         </div>
@@ -180,6 +199,14 @@ async function loadJSON(path, fallback) {
 
 async function init() {
   $('#copyrightYear').textContent = new Date().getFullYear();
+  applyTheme(localStorage.getItem(THEME_KEY) || 'system', false);
+
+  $('#themeToggle').addEventListener('click', cycleTheme);
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    if ((document.documentElement.dataset.themePreference || 'system') === 'system') {
+      applyTheme('system', false);
+    }
+  });
 
   const [pubData, peerData] = await Promise.all([
     loadJSON('data/publications.json', { publications: [], meta: {} }),

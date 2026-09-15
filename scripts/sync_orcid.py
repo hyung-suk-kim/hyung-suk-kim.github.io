@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 import urllib.parse
 import urllib.request
@@ -222,26 +223,73 @@ def collect_put_codes(node, out: set[int]):
             collect_put_codes(item, out)
 
 
-def normalize_peer_review(pr):
-    outlet = first_value(
+def issn_from_group_id(group_id):
+    """Return a normalized ISSN from an ORCID peer-review group id, if present."""
+    if not group_id:
+        return None
+    m = re.search(r"issn:\s*([0-9Xx]{4})-?([0-9Xx]{4})", str(group_id), flags=re.I)
+    if not m:
+        return None
+    return f"{m.group(1).upper()}-{m.group(2).upper()}"
+
+
+def resolve_journal_title_from_issn(issn, cache):
+    """Resolve an ISSN to a journal title for display.
+
+    ORCID often stores only the ISSN group id plus the publisher as the convening
+    organization. Crossref is used only to turn that ISSN into a human-readable
+    journal title; ORCID remains the source of the review activity itself.
+    """
+    if not issn:
+        return None
+    if issn in cache:
+        return cache[issn]
+    title = None
+    try:
+        url = f"https://api.crossref.org/journals/{urllib.parse.quote(issn)}"
+        req = urllib.request.Request(
+            url,
+            headers={"Accept": "application/json", "User-Agent": UA},
+        )
+        with urllib.request.urlopen(req, timeout=15) as r:
+            body = json.loads(r.read().decode("utf-8"))
+        message = body.get("message") or {}
+        raw = message.get("title")
+        if isinstance(raw, list):
+            title = next((str(x).strip() for x in raw if str(x).strip()), None)
+        elif raw:
+            title = str(raw).strip()
+    except Exception as e:
+        print(f"warning: failed to resolve ISSN {issn}: {e}", file=sys.stderr)
+    cache[issn] = title
+    return title
+
+
+def normalize_peer_review(pr, journal_cache):
+    group_id = first_value(pr, ("review-group-id",))
+    issn = issn_from_group_id(group_id)
+
+    # Prefer an explicit journal/container name from ORCID. If it is absent,
+    # resolve the ORCID ISSN group id to the journal title. Only then fall back
+    # to the convening organization (normally the publisher).
+    explicit_outlet = first_value(
         pr,
         ("subject-container-name", "title"),
         ("subject-container-name",),
-        ("convening-organization", "name"),
-        ("organization", "name"),
-        ("review-group-id",),
-    ) or "Peer review"
+    )
+    resolved_outlet = resolve_journal_title_from_issn(issn, journal_cache)
+    organization = first_value(pr, ("convening-organization", "name"), ("organization", "name"))
+    outlet = explicit_outlet or resolved_outlet or organization or group_id or "Peer review"
 
-    url = first_value(pr, ("url",), ("review-url",))
+    url = first_value(pr, ("review-url",), ("url",))
     review_type = first_value(pr, ("review-type",), ("type",))
     role = first_value(pr, ("reviewer-role",))
-    organization = first_value(pr, ("convening-organization", "name"), ("organization", "name"))
     source_name = first_value(pr, ("source", "source-name"),)
-    group_id = first_value(pr, ("review-group-id",))
 
-    year = to_int(first_value(pr, ("completion-date", "year"),))
-    month = to_int(first_value(pr, ("completion-date", "month"),))
-    day = to_int(first_value(pr, ("completion-date", "day"),))
+    # ORCID v3.0 uses review-completion-date.
+    year = to_int(first_value(pr, ("review-completion-date", "year"),))
+    month = to_int(first_value(pr, ("review-completion-date", "month"),))
+    day = to_int(first_value(pr, ("review-completion-date", "day"),))
 
     if year and month and day:
         date_label = f"{year:04d}-{month:02d}-{day:02d}"
@@ -263,13 +311,14 @@ def normalize_peer_review(pr):
         "completion_day": day,
         "date_label": date_label,
         "group_id": group_id,
+        "issn": issn,
         "url": url,
         "source_name": source_name,
     }
 
-
 def sync_peer_reviews(auth):
     peer_reviews = []
+    journal_cache = {}
     try:
         summary = request_json(f"{API}/{ORCID_ID}/peer-reviews", headers=auth)
         puts: set[int] = set()
@@ -280,7 +329,7 @@ def sync_peer_reviews(auth):
             except Exception as e:
                 print(f"warning: failed to fetch peer-review put-code {put}: {e}", file=sys.stderr)
                 continue
-            peer_reviews.append(normalize_peer_review(detail))
+            peer_reviews.append(normalize_peer_review(detail, journal_cache))
     except Exception as e:
         print(f"warning: peer-review sync unavailable: {e}", file=sys.stderr)
 

@@ -1,11 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme-preference="system">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Hyung Suk Kim — researcher profile, publications, peer review, and scholarly record." />
-  <meta name="theme-color" content="#0a0b0d" />
+  <meta name="description" content="Hyung Suk Kim — ORCID-linked researcher profile, publications, peer review, and scholarly record." />
+  <meta name="theme-color" content="#090a0d" />
   <title>Hyung Suk Kim — Researcher Profile</title>
+  <script>
+    (() => {
+      const pref = localStorage.getItem('hsk-theme') || 'system';
+      const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.dataset.themePreference = pref;
+      document.documentElement.dataset.theme = pref === 'system' ? (dark ? 'dark' : 'light') : pref;
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
@@ -14,6 +22,7 @@
 <body>
   <div class="ambient ambient-a"></div>
   <div class="ambient ambient-b"></div>
+  <div class="ambient ambient-c"></div>
 
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Home">
@@ -21,12 +30,18 @@
       <span class="brand-rule"></span>
       <span class="brand-sub">Researcher profile</span>
     </a>
-    <nav class="nav" aria-label="Primary">
-      <a href="#research">Research</a>
-      <a href="#publications">Publications</a>
-      <a href="#service">Service</a>
-      <a href="https://maxam.gachon.ac.kr/" target="_blank" rel="noreferrer">MAXAM ↗</a>
-    </nav>
+    <div class="header-actions">
+      <nav class="nav" aria-label="Primary">
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#service">Peer review</a>
+        <a href="https://maxam.gachon.ac.kr/" target="_blank" rel="noreferrer">MAXAM ↗</a>
+      </nav>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Change color theme" title="Change color theme">
+        <span id="themeIcon" aria-hidden="true">◐</span>
+        <span id="themeLabel">System</span>
+      </button>
+    </div>
   </header>
 
   <main id="top">
@@ -36,7 +51,7 @@
         <div class="hero-copy">
           <p class="kicker">Organic electronics · Photophysics · Computational materials science</p>
           <h1>Hyung Suk<br><span>Kim</span></h1>
-          <p class="lede">Assistant Professor in Semiconductor Engineering at Gachon University. I study how molecular excited-state dynamics become measurable device physics — from spin conversion and exciton transport to OLED efficiency, stability, and computational discovery.</p>
+          <p class="lede">Assistant Professor at Gachon University studying organic optoelectronics, excited-state photophysics, OLED device physics, and computational materials science.</p>
           <div class="link-row">
             <a class="button primary" href="https://orcid.org/0000-0002-9155-1144" target="_blank" rel="noreferrer">ORCID <span>↗</span></a>
             <a class="button" href="https://scholar.google.com/citations?user=k4w7hi8AAAAJ" target="_blank" rel="noreferrer">Google Scholar <span>↗</span></a>
@@ -46,7 +61,9 @@
 
         <aside class="identity-card" aria-label="Research identity">
           <div class="identity-top">
-            <div class="monogram">H<span>S</span>K</div>
+            <div class="portrait-wrap">
+              <img class="profile-portrait" src="assets/profile.png" alt="Illustrated portrait of Hyung Suk Kim" />
+            </div>
             <div>
               <p class="identity-label">CURRENT</p>
               <p class="identity-value">Gachon University</p>
@@ -56,29 +73,29 @@
           <div class="identity-divider"></div>
           <div class="identity-row"><span>ORCID</span><strong>0000-0002-9155-1144</strong></div>
           <div class="identity-row"><span>LAB</span><strong>MAXAM</strong></div>
-          <div class="identity-row"><span>FOCUS</span><strong>Molecule → Exciton → Device</strong></div>
+          <div class="identity-row"><span>FOCUS</span><strong>Photophysics · OLEDs · Computation</strong></div>
           <div class="sync-line"><span class="status-dot"></span><span id="syncText">Scholarly record ready</span></div>
         </aside>
       </div>
 
       <div class="metrics" aria-label="Profile metrics">
-        <div class="metric"><strong id="pubCount">—</strong><span>ORCID works</span></div>
-        <div class="metric"><strong id="reviewCount">—</strong><span>peer reviews</span></div>
-        <div class="metric"><strong id="yearSpan">—</strong><span>publication span</span></div>
-        <div class="metric"><strong id="latestYear">—</strong><span>latest record</span></div>
+        <div class="metric metric-green"><strong id="pubCount">—</strong><span>ORCID works</span></div>
+        <div class="metric metric-coral"><strong id="reviewCount">—</strong><span>peer reviews</span></div>
+        <div class="metric metric-plum"><strong id="yearSpan">—</strong><span>publication span</span></div>
+        <div class="metric metric-blue"><strong id="latestYear">—</strong><span>latest record</span></div>
       </div>
     </section>
 
     <section id="research" class="section shell">
       <div class="section-head">
         <div><p class="section-index">01 / RESEARCH</p><h2>From hidden states<br>to working devices.</h2></div>
-        <p class="section-note">The personal profile is intentionally narrower than MAXAM: it tracks the researcher's record, while the laboratory site carries the group's full identity, people, projects, and news.</p>
+        <p class="section-note">A compact view of the research framework developed in MAXAM — from molecular excited states to device-scale behavior and predictive computation.</p>
       </div>
       <div class="research-grid">
-        <article class="research-card"><span>01</span><h3>Molecular Design</h3><p>Excited-state landscape engineering for high-purity and high-efficiency organic emitters.</p></article>
-        <article class="research-card"><span>02</span><h3>Exciton Dynamics</h3><p>Spin conversion, transport, annihilation, delayed fluorescence, and kinetic pathway analysis.</p></article>
-        <article class="research-card"><span>03</span><h3>Device Physics</h3><p>Connecting microscopic photophysics to OLED roll-off, stability, optics, and macroscopic performance.</p></article>
-        <article class="research-card"><span>04</span><h3>Computational Discovery</h3><p>Quantum chemistry, molecular dynamics, multiscale simulation, numerical modeling, and ML/QSPR.</p></article>
+        <article class="research-card research-green"><span>01</span><h3>Molecular Design</h3><p>Engineering excited-state landscapes for color-pure and efficient organic emitters.</p></article>
+        <article class="research-card research-coral"><span>02</span><h3>Exciton Dynamics</h3><p>Revealing how excitons are generated, converted, transported, confined, and dissipated in organic solids.</p></article>
+        <article class="research-card research-plum"><span>03</span><h3>Device Physics</h3><p>Linking molecular photophysics to OLED efficiency, roll-off, optics, electrical behavior, and operational stability.</p></article>
+        <article class="research-card research-blue"><span>04</span><h3>Computational Discovery</h3><p>Combining quantum chemistry, molecular dynamics, multiscale modeling, and machine learning for predictive materials design.</p></article>
       </div>
     </section>
 
@@ -136,7 +153,7 @@
 
   <footer class="footer shell">
     <span>© <span id="copyrightYear"></span> Hyung Suk Kim</span>
-    <span>Built as a live scholarly profile · Publications and peer reviews sourced from ORCID where available</span>
+    <span>Live scholarly profile · Publications and peer reviews sourced from ORCID</span>
   </footer>
 
   <script src="assets/app.js" defer></script>
