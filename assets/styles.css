@@ -342,3 +342,4 @@ option { background:var(--panel); color:var(--text); }
 @media (prefers-reduced-motion: reduce) {
   .status-dot { animation: none; }
 }
+\n\n/* v9.4 — compact, expandable peer-review summary */\n#peerReviewSummary {\n  display:flex;\n  align-items:center;\n  flex-wrap:wrap;\n  gap:5px 7px;\n}\n.venue-more-toggle {\n  appearance:none;\n  border:0;\n  padding:2px 7px;\n  border-radius:999px;\n  background:rgba(var(--green-rgb),.08);\n  color:var(--green);\n  font:inherit;\n  font-size:11px;\n  font-weight:600;\n  line-height:1.45;\n  cursor:pointer;\n  transition:background .18s ease, color .18s ease, transform .18s ease;\n}\n.venue-more-toggle:hover {\n  background:rgba(var(--green-rgb),.14);\n  transform:translateY(-1px);\n}\n.venue-more-list {\n  flex-basis:100%;\n  padding-top:2px;\n  color:var(--muted-2);\n  font-size:11px;\n  line-height:1.55;\n}\n.venue-more-list[hidden] { display:none !important; }\n

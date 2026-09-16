@@ -12,10 +12,20 @@ function esc(s = '') {
   return String(s).replace(/[&<>'"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c]));
 }
 
+function isHyungSukKim(name = '') {
+  const normalized = String(name)
+    .toLowerCase()
+    .replace(/[.,]/g, ' ')
+    .replace(/[-–—]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return normalized === 'hyung suk kim' || normalized === 'kim hyung suk';
+}
+
 function highlightMe(authors = []) {
   if (!authors.length) return '';
   return authors.map(a => {
-    const isMe = /hyung\s*-?\s*suk\s+kim/i.test(a);
+    const isMe = isHyungSukKim(a);
     return `<span class="${isMe ? 'me' : ''}">${esc(a)}</span>`;
   }).join(', ');
 }
@@ -125,13 +135,42 @@ function renderPeerReviews() {
     grouped.set(key, arr);
   });
 
-  const summary = [...grouped.entries()]
-    .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))
-    .slice(0, 4)
-    .map(([name, arr]) => `${name} (${arr.length})`)
+  const sortedGroups = [...grouped.entries()]
+    .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+
+  const compactVenueName = (name) => ({
+    'Applied Physics Letters': 'APL',
+    'Dyes and Pigments': 'Dyes & Pigments',
+    'ACS Applied Electronic Materials': 'ACS AEM'
+  }[name] || name);
+
+  const visibleGroups = sortedGroups.slice(0, 3);
+  const hiddenGroups = sortedGroups.slice(3);
+  const visibleSummary = visibleGroups
+    .map(([name, arr]) => `${compactVenueName(name)} ${arr.length}`)
+    .join(' · ');
+  const hiddenSummary = hiddenGroups
+    .map(([name, arr]) => `${compactVenueName(name)} ${arr.length}`)
     .join(' · ');
 
-  $('#peerReviewSummary').textContent = `${state.peerReviews.length} verified review record${state.peerReviews.length > 1 ? 's' : ''}${summary ? ` · ${summary}` : ''}`;
+  $('#peerReviewSummary').innerHTML = `
+    <span>${state.peerReviews.length} verified reviews${visibleSummary ? ` · ${esc(visibleSummary)}` : ''}</span>
+    ${hiddenGroups.length ? `
+      <button class="venue-more-toggle" type="button" aria-expanded="false">+${hiddenGroups.length} more</button>
+      <span class="venue-more-list" hidden>${esc(hiddenSummary)}</span>
+    ` : ''}
+  `;
+
+  const moreToggle = $('#peerReviewSummary .venue-more-toggle');
+  const moreList = $('#peerReviewSummary .venue-more-list');
+  if (moreToggle && moreList) {
+    moreToggle.addEventListener('click', () => {
+      const expanded = moreToggle.getAttribute('aria-expanded') === 'true';
+      moreToggle.setAttribute('aria-expanded', String(!expanded));
+      moreList.hidden = expanded;
+      moreToggle.textContent = expanded ? `+${hiddenGroups.length} more` : 'Show less';
+    });
+  }
 
   list.innerHTML = [...grouped.entries()]
     .sort((a, b) => {
